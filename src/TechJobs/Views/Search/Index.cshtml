@@ -1,25 +1,41 @@
 ﻿<h1>@ViewBag.title</h1>
 
-<form action="/Search/Results">
+<form method="post">
     <h2>Search by:</h2>
 
     <p>
         @foreach (KeyValuePair<string, string> column in ViewBag.columns)
         {
-            <span>
+
+            @if (column.Key == ViewBag.check)
+            {
+                <span>
                 <input type="radio"
                        name="searchType"
                        id="@column.Key"
                        value="@column.Key" 
-                       checked="@column.Key == 'all''"/>
+                       checked />
                 <label for="@column.Key">@column.Value</label>
-            </span>
+                </span>
+            }
+            else
+            {
+                <span>
+                    <input type="radio"
+                           name="searchType"
+                           id="@column.Key"
+                           value="@column.Key"/>
+                    <label for="@column.Key">@column.Value</label>
+                </span>
+
+            }
+
         }
     </p>
 
     <p>
         <label for="searchTerm">Keyword:</label>
-        <input type="text" name="searchTerm" id="searchTerm" />
+        <input type="text" name="searchTerm" id="searchTerm" value="@ViewBag.searchTerm"/>
     </p>
 
     <input type="submit" value="Search" />
@@ -33,4 +49,18 @@
     <h3>@ViewBag.jobs.Count Result(s)</h3>
 
     // TODO #2 - Loop over jobs dictionary and display all job fields 
+    @foreach (Dictionary<string, string> job in ViewBag.jobs)
+    {
+        <table class="job-listing">
+
+            @foreach (KeyValuePair<string, string> data in job)
+            {
+                <tr>
+                    <td>@data.Key:  @data.Value</td>
+                </tr>
+
+            }
+
+        </table>
+    }
 }
