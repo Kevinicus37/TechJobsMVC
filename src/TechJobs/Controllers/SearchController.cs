@@ -6,13 +6,15 @@ namespace TechJobs.Controllers
 {
     public class SearchController : Controller
     {
+
+        
         [HttpGet]
         public IActionResult Index()
         {
             ViewBag.columns = ListController.columnChoices;
             ViewBag.title = "Search";
             ViewBag.searchTerm = "";
-            ViewBag.check = "all";
+            ViewBag.check = "All";
             return View();
         }
 
@@ -25,7 +27,7 @@ namespace TechJobs.Controllers
             ViewBag.searchTerm = searchTerm;
             ViewBag.check = searchType;
 
-            if (searchType.Equals("all"))
+            if (searchType.Equals("All"))
             {
                 jobs = JobData.FindByValue(searchTerm);
                 ViewBag.title = string.Format("Results for '{0}' in all categories", searchTerm);

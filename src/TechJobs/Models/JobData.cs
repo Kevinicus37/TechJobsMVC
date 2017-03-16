@@ -7,8 +7,38 @@ namespace TechJobs.Models
 {
     class JobData
     {
+
+
         static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
+
+        public static string Capitalize(string value)
+        {
+
+            if (value.Length == 0)
+            {
+                return value;
+            }
+
+            StringBuilder newString = new StringBuilder(value);
+
+            newString[0] = char.ToUpper(newString[0]);
+            for (int i = 1; i < newString.Length; i++)
+            {
+                if (char.IsWhiteSpace(newString[i - 1]))
+                {
+                    newString[i] = char.ToUpper(newString[i]);
+                }
+                else
+                {
+                    newString[i] = char.ToLower(newString[i]);
+                }
+            }
+
+            return newString.ToString();
+
+        }
+
 
         public static List<Dictionary<string, string>> FindAll()
         {
@@ -136,7 +166,7 @@ namespace TechJobs.Models
 
                 for (int i = 0; i < headers.Length; i++)
                 {
-                    rowDict.Add(headers[i], row[i]);
+                    rowDict.Add(Capitalize(headers[i]), row[i]);
                 }
                 AllJobs.Add(rowDict);
             }

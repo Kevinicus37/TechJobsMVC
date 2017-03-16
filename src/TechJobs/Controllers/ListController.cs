@@ -14,11 +14,11 @@ namespace TechJobs.Controllers
         static ListController() 
         {
             
-            columnChoices.Add("core competency", "Skill");
-            columnChoices.Add("employer", "Employer");
-            columnChoices.Add("location", "Location");
-            columnChoices.Add("position type", "Position Type");
-            columnChoices.Add("all", "All");
+            columnChoices.Add("Core Competency", "Skill");
+            columnChoices.Add("Employer", "Employer");
+            columnChoices.Add("Location", "Location");
+            columnChoices.Add("Position Type", "Position Type");
+            columnChoices.Add("All", "All");
         }
 
         public IActionResult Index()
@@ -29,7 +29,7 @@ namespace TechJobs.Controllers
 
         public IActionResult Values(string column)
         {
-            if (column.Equals("all"))
+            if (column.Equals("All"))
             {
                 List<Dictionary<string, string>> jobs = JobData.FindAll();
                 ViewBag.title =  "All Jobs";

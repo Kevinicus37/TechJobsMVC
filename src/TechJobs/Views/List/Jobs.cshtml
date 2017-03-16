@@ -1,6 +1,5 @@
 ﻿<h1>@ViewBag.title</h1>
 
-<h3>@ViewBag.jobs.Count Result(s)</h3>
 
 <hr />
 
@@ -17,7 +16,15 @@
         @foreach (KeyValuePair<string, string> data in job)
         {
             <tr>
-            <td><strong>@data.Key:</strong>  @data.Value</td>
+            @if (data.Key != "Name")
+            {
+            <td><strong>@data.Key:</strong><a asp-controller="List" asp-action="Jobs" asp-route-column="@data.Key" asp-route-value="@data.Value">@data.Value</a></td>
+            }
+            else
+            {
+            <td><strong>@data.Key:</strong> @data.Value</td>
+
+            }
             </tr>
 
         }
